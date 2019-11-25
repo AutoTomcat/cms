@@ -2,6 +2,7 @@ package com.briup.apps.cms.config;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -23,6 +24,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+	
+	@Bean
+	public JwtInterceptor jwtInterceptor() {
+		return new JwtInterceptor();
+	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		//拦截路径可自行配置多个 可用 ，分隔开
+		registry.addInterceptor(jwtInterceptor())
+//				.addPathPatterns("/category/**","/article/**","/user/**","/role/**","/privilege/**")
+				.addPathPatterns("/**")
+				.excludePathPatterns(
+						"/swagger-resources/**","/v2/**","/swagger-ui.html","/webjars/**",
+						"/user/login","/user/logout","/article/download","/privilege/findPrivilegeTree");
+	}
+	
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 
@@ -46,11 +64,7 @@ public class WebConfig implements WebMvcConfigurer {
 		
 	}
 
-	@Override
-	public void addInterceptors(InterceptorRegistry arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry arg0) {

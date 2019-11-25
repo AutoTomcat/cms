@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.apps.cms.dao.PrivilegeExtendMapper">
+	
+	
+  <select id="selectByUserId" resultType="com.briup.apps.cms.bean.Privilege">
+  	SELECT * 
+  	FRPOM cms_user u,cms_user_role r, cms_role role,cms_role_privilege p,cms_privilege privilege
+  	WHERE u.id = r.user_id 
+  	AND   r.role_id = p.role_id
+  	AND   u.id = #{id,jdbcType=BIGINT}
+  </select>
+  
+</mapper>

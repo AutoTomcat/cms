@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.briup.apps.cms.bean.User;
 import com.briup.apps.cms.bean.extend.UserExtend;
 import com.briup.apps.cms.service.IUserService;
+import com.briup.apps.cms.utils.JwtTokenUtil;
 import com.briup.apps.cms.utils.Message;
 import com.briup.apps.cms.utils.MessageUtil;
 import com.briup.apps.cms.vm.UserVM;
@@ -45,7 +46,7 @@ public class UserController {
 			if(userVM.getUsername().equals(userExtend.getName())&&
 			   userVM.getPassword().equals(userExtend.getPassword())) {
 				Map<String,String> map = new HashMap<>();
-				map.put("token", userExtend.getName()+"-token");
+				map.put("token", JwtTokenUtil.createJWT(userExtend.getId(), userExtend.getName()));
 				return  MessageUtil.success(map);
 			}
 			return MessageUtil.error("密码错误");

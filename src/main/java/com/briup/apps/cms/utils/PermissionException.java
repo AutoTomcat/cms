@@ -2,7 +2,12 @@ package com.briup.apps.cms.utils;
 
 public class PermissionException extends CustomerException{
 	
-	  public PermissionException() {
+	  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public PermissionException() {
 	    }
 
 	    public PermissionException(String message) {

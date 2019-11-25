@@ -2,7 +2,12 @@ package com.briup.apps.cms.utils;
 
 public class UnAuthorizedException extends CustomerException{
 
-	 public UnAuthorizedException() {
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public UnAuthorizedException() {
 	    }
 
 	    public UnAuthorizedException(String message) {
